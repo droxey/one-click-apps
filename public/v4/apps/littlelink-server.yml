@@ -1,0 +1,34 @@
+captainVersion: 4
+services:
+    '$$cap_appname':
+        image: ghcr.io/techno-tim/littlelink-server:$$cap_version
+        environment:
+            TZ: '$$cap_tz'
+            PHP_TZ: '$$cap_tz'
+        volumes:
+            - '$$cap_appname-data:/srv/data'
+        caproverExtra:
+            containerHttpPort: '8080'
+caproverOneClickApp:
+    variables:
+        - id: '$$cap_version'
+          label: LittleLink Server Version
+          defaultValue: 'latest'
+          description: Check out the Docker page for the valid tags https://hub.docker.com/r/timothystewart6/littlelink-server/tags
+          validRegex: "/^([^\\s^\\/])+$/"
+        - id: '$$cap_tz'
+          label: Time Zone
+          defaultValue: America/Los_Angeles
+          description: Get yours from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+          validRegex: '/.{1,}/'
+    instructions:
+        start: |-
+            LittleLink Server is an open source DIY self-hosted alternative to services like Linktree and many.link.
+
+            More details: https://github.com/techno-tim/littlelink-server
+        end: |-
+            LittleLink Server has been successfully deployed!
+    displayName: LittleLink Server
+    isOfficial: false
+    description: LittleLink Server is an open source DIY self-hosted alternative to services like Linktree and many.link.
+    documentation: https://github.com/techno-tim/littlelink-server
